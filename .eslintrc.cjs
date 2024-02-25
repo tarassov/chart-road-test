@@ -1,8 +1,10 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true,"jest": true },
-  extends: [ "airbnb", "airbnb-typescript", "plugin:prettier/recommended",  'plugin:react-hooks/recommended'],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": ["airbnb", "airbnb-typescript", "plugin:prettier/recommended",'plugin:react-hooks/recommended'],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -12,8 +14,8 @@ module.exports = {
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  plugins: ['react-refresh',"@typescript-eslint", "react", "testing-library", "prettier"],
-  rules: {
+  "plugins": ["@typescript-eslint", "react", "testing-library", "prettier"],
+  "rules": {
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "@typescript-eslint/naming-convention": "off",
     "comma-spacing": ["warn", { "before": false, "after": true }],

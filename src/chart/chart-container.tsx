@@ -1,13 +1,14 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { SimpleCharts } from "@/chart/bar-chart";
 import { useData } from "@/chart/use-data";
 import { getSpeedSeriesFactory } from "@/chart/helpers/get-speed-series";
 import { ModalLoader } from "@/components/modal-loader";
+import { Legend } from "@/components/legend";
 
 export const ChartContainer = () => {
 	const [, forceRerender] = useState({});
-	const { transformedData, pointsData, minStep, fetchedPoints, generateNew, isLoading } = useData();
+	const { transformedData, pointsData, fetchedPoints, generateNew, isLoading } = useData();
 
 	useEffect(() => {
 		let timeout: NodeJS.Timeout;
@@ -45,9 +46,9 @@ export const ChartContainer = () => {
 					/>
 				) : null}
 			</Box>
-
-			<div>RunningDistance: {transformedData.runningDistance}</div>
-			<div>Min step: {minStep}</div>
+			<Paper sx={{ p: 4, mx: 5 }}>
+				<Legend />
+			</Paper>
 			<ModalLoader loading={isLoading} />
 		</>
 	);

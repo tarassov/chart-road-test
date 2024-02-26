@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
 
-const BASE_URL = "http://94.198.218.177:8000/";
+const BASE_URL = "https://charts.tarassov.space/";
 
 axios.defaults.baseURL = BASE_URL;
 

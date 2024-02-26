@@ -2,6 +2,7 @@
   "name": "chart-road-test",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://tarassov.github.io/chart-road-test/",
   "type": "module",
   "scripts": {
     "dev": "vite",

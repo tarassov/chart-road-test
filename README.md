@@ -1,4 +1,4 @@
-# Chart abilities demostration
+# Chart abilities demonstration
 
 ## Stack
 React + TypeScript + Vite + Mui-x Charts

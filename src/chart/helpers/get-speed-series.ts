@@ -11,10 +11,13 @@ export const getSpeedSeriesFactory = (
 		return {
 			type: "line",
 			data: data.data.map((x) => {
-				if (x.maxSpeed !== speed) return null;
+				if (x.maxSpeed !== speed) {
+					return null;
+				}
 				const point = points.find(
 					(p) => p.id === x.secondId || (x.isFirstPoint && p.id === x.firstId)
 				);
+
 				return point?.height || null;
 			}),
 			color: SpeedColors[speed],

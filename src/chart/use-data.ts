@@ -1,18 +1,38 @@
-import { arrayOfPoints, mockTrack } from "mock/mock-track";
 import { getCommonDivisor } from "utils/get-common-divisor";
-import { useCallback, useMemo } from "react";
-import { CharBar, Track, TransformedData } from "@/types";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { CharBar, Point, Track, TransformedData } from "@/types";
+import { pointsApi } from "@/api/points-api";
 
 export const useData = () => {
-	const fetchedData = mockTrack;
-	const fetchedPoints = arrayOfPoints;
+	const [fetchedData, setTrack] = useState<Array<Track>>([]);
+	const [fetchedPoints, setPoints] = useState<Array<Point>>([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const points = fetchedData.map((x) => x.firstId);
+	const fetch = () => {
+		setIsLoading(true);
+		pointsApi.getAllPoints().then((res) => {
+			setPoints(res);
+			pointsApi.getAllTracks().then((tracks) => {
+				setTrack(tracks);
+				setTimeout(() => setIsLoading(false), 600);
+			});
+		});
+	};
+	const generateNew = () => {
+		pointsApi.generateNew().then(() => {
+			fetch();
+		});
+	};
+
+	useEffect(() => {
+		fetch();
+	}, []);
 
 	const minStep = useMemo(() => {
 		return getCommonDivisor(fetchedData.map((x) => x.distance));
 	}, [fetchedData]);
 	const maxHeight = useMemo(
-		() => [...fetchedPoints].sort((a, b) => b.height - a.height)?.[0].height,
+		() => [...fetchedPoints].sort((a, b) => b.height - a.height)?.[0]?.height,
 		[fetchedPoints]
 	);
 	const getDistanceForPoint = useCallback(
@@ -77,6 +97,5 @@ export const useData = () => {
 			} as TransformedData
 		);
 	}, [fetchedData, maxHeight, minStep]);
-
-	return { transformedData, pointsData, minStep, fetchedPoints };
+	return { transformedData, pointsData, minStep, fetchedPoints, fetch, generateNew, isLoading };
 };

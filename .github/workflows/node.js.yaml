@@ -14,9 +14,30 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: yarn install
+
+      #    - name: Run the tests and generate coverage report
+      #      run: yarn test --coverage
+
+      - name: Build
+        run: yarn build
+
       - name: RUN DEPLOY TO GITHUB-PAGES
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.DEPLOY_TOKEN }}
           publish_dir: ./dist
+

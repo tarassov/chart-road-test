@@ -10,4 +10,5 @@ export default defineConfig({
 		react(),
 		tsconfigPaths(),
 	],
+	base: "/chart-road-test/",
 });

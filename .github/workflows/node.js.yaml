@@ -14,11 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - name: RUN DEPLOY TO GITHUB-PAGES
         uses: peaceiris/actions-gh-pages@v3

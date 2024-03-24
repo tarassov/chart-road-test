@@ -14,6 +14,3 @@ https://charts.tarassov.space/swagger/index.html
 
 ## Backend repo
 https://github.com/tarassov/ChartTestApi
-
-## Demo 
-https://tarassov.github.io/chart-road-test/
